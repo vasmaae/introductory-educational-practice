@@ -296,7 +296,6 @@
             textBoxMassive.Location = new Point(6, 30);
             textBoxMassive.Multiline = true;
             textBoxMassive.Name = "textBoxMassive";
-            textBoxMassive.ReadOnly = true;
             textBoxMassive.Size = new Size(150, 150);
             textBoxMassive.TabIndex = 0;
             // 
@@ -337,7 +336,7 @@
             buttonShowProcessedArray.Name = "buttonShowProcessedArray";
             buttonShowProcessedArray.Size = new Size(193, 23);
             buttonShowProcessedArray.TabIndex = 2;
-            buttonShowProcessedArray.Text = "Вывести обработанный массив";
+            buttonShowProcessedArray.Text = "Вывести решение";
             buttonShowProcessedArray.UseVisualStyleBackColor = true;
             buttonShowProcessedArray.Click += ButtonShowProcessedArray_Click;
             // 
@@ -359,7 +358,7 @@
             labelOptionalTask.TabIndex = 4;
             labelOptionalTask.Text = "Задание по варианту:";
             // 
-            // FormMassive
+            // FormArray
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -367,7 +366,7 @@
             Controls.Add(panelProcessedArray);
             Controls.Add(panelInitialArray);
             Controls.Add(panelTasks);
-            Name = "FormMassive";
+            Name = "FormArray";
             Text = "Form";
             panelTasks.ResumeLayout(false);
             panelTasks.PerformLayout();
