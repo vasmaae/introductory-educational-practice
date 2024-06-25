@@ -29,7 +29,6 @@ public static class ArrayHandler
                             positiveLength = currentLength;
                             positiveRangeStartIndex = currentRangeStartIndex;
                         }
-                        currentLength = 0;
                         break;
                     case -1:
                         if (currentLength > negativeLength)
@@ -37,13 +36,12 @@ public static class ArrayHandler
                             negativeLength = currentLength;
                             negativeRangeStartIndex = currentRangeStartIndex;
                         }
-                        currentLength = 0;
                         break;
                 }
 
                 currentRangeSign = currentSign;
                 currentRangeStartIndex = i;
-                currentLength++;
+                currentLength = 1;
             }
         }
 
@@ -59,7 +57,6 @@ public static class ArrayHandler
 
     public static string Task2(int[] array)
     {
-        return "";
     }
 
     public static string Task3(int[] array)

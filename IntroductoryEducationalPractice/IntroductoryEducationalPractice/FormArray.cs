@@ -27,36 +27,34 @@ public partial class FormArray : Form
     {
         _taskNumber = (short)(short.Parse(((Button)sender).Text) - 1);
         textBoxOptionalTask.Text = _tasks[_taskNumber];
-        textBoxProcessedArray.Text = null;
+        textBoxSolution.Text = null;
     }
 
     private void ButtonGenerate1DArray_Click(object sender, EventArgs e)
     {
         _array2D = new int[0, 0];
+        _array1D = [];
 
-        _array1D = ArrayGenerator.GenerateArray((int)numericUpDownLength.Value, (int)numericUpDownMinValue.Value, (int)numericUpDownMaxValue.Value);
+        int[] array = ArrayGenerator.GenerateArray((int)numericUpDownLength.Value, (int)numericUpDownMinValue.Value, (int)numericUpDownMaxValue.Value);
 
         StringBuilder sb = new();
-        for (int i = 0; i < _array1D.GetLength(0); i++)
-        {
-            sb.Append(_array1D[i]);
-            sb.Append(' ');
-        }
-
+        sb.Append(string.Join(' ', array));
         textBoxMassive.Text = sb.ToString();
     }
 
     private void ButtonGenerate2DArray_Click(object sender, EventArgs e)
     {
+        _array2D = new int[0, 0];
         _array1D = [];
-        _array2D = ArrayGenerator.GenerateArray((int)numericUpDownHeight.Value, (int)numericUpDownLength.Value, (int)numericUpDownMinValue.Value, (int)numericUpDownMaxValue.Value);
+
+        int[,] array = ArrayGenerator.GenerateArray((int)numericUpDownHeight.Value, (int)numericUpDownLength.Value, (int)numericUpDownMinValue.Value, (int)numericUpDownMaxValue.Value);
 
         StringBuilder sb = new();
-        for (int i = 0; i < _array2D.GetLength(0); i++)
+        for (int i = 0; i < array.GetLength(0); i++)
         {
-            for (int j = 0; j < _array2D.GetLength(1); j++)
+            for (int j = 0; j < array.GetLength(1); j++)
             {
-                sb.Append(_array2D[i, j]);
+                sb.Append(array[i, j]);
                 sb.Append(' ');
             }
             sb.Append(Environment.NewLine);
@@ -65,33 +63,33 @@ public partial class FormArray : Form
         textBoxMassive.Text = sb.ToString();
     }
 
-    private void GetArray1D()
+    private void GetArray1D(float relativeIncrease)
     {
         try
         {
             string[] array = textBoxMassive.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            _array1D = new int[array.Length];
+            _array1D = new int[(int) (array.Length * relativeIncrease) + 1];
 
             for (int i = 0; i < array.Length; i++)
             {
                 _array1D[i] = int.Parse(array[i]);
             }
         }
-        catch (FormatException ex)
+        catch (FormatException _)
         {
             MessageBox.Show("Ошибка", "Неверный формат ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
-    private void ButtonShowProcessedArray_Click(object sender, EventArgs e)
+    private void ButtonShowSolution_Click(object sender, EventArgs e)
     {
         switch (_taskNumber)
         {
             case 0:
-                GetArray1D();
+                GetArray1D(1);
                 try
                 {
-                    textBoxProcessedArray.Text = ArrayHandler.Task1(_array1D);
+                    textBoxSolution.Text = ArrayHandler.Task1(_array1D);
                 }
                 catch (Exception ex)
                 {
@@ -99,15 +97,15 @@ public partial class FormArray : Form
                 }
                 break;
             case 1:
-                GetArray1D();
-                try
-                {
-                    textBoxProcessedArray.Text = ArrayHandler.Task2(_array1D);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Недостаточно данных или данные не верны", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                GetArray1D(2);
+                //try
+                //{
+                    textBoxSolution.Text = ArrayHandler.Task2(_array1D);
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show("Недостаточно данных или данные не верны", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
                 break;
         }
     }

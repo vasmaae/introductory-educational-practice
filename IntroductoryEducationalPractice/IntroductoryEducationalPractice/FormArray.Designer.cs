@@ -53,9 +53,9 @@
             textBoxMassive = new TextBox();
             textBoxOptionalTask = new TextBox();
             panelProcessedArray = new Panel();
-            labelProcessedArray = new Label();
-            buttonShowProcessedArray = new Button();
-            textBoxProcessedArray = new TextBox();
+            labelSolution = new Label();
+            buttonShowSolution = new Button();
+            textBoxSolution = new TextBox();
             labelOptionalTask = new Label();
             panelTasks.SuspendLayout();
             panelInitialArray.SuspendLayout();
@@ -311,9 +311,9 @@
             // panelProcessedArray
             // 
             panelProcessedArray.Controls.Add(textBoxOptionalTask);
-            panelProcessedArray.Controls.Add(labelProcessedArray);
-            panelProcessedArray.Controls.Add(buttonShowProcessedArray);
-            panelProcessedArray.Controls.Add(textBoxProcessedArray);
+            panelProcessedArray.Controls.Add(labelSolution);
+            panelProcessedArray.Controls.Add(buttonShowSolution);
+            panelProcessedArray.Controls.Add(textBoxSolution);
             panelProcessedArray.Controls.Add(labelOptionalTask);
             panelProcessedArray.Dock = DockStyle.Bottom;
             panelProcessedArray.Location = new Point(98, 183);
@@ -321,33 +321,33 @@
             panelProcessedArray.Size = new Size(578, 181);
             panelProcessedArray.TabIndex = 7;
             // 
-            // labelProcessedArray
+            // labelSolution
             // 
-            labelProcessedArray.AutoSize = true;
-            labelProcessedArray.Location = new Point(212, 3);
-            labelProcessedArray.Name = "labelProcessedArray";
-            labelProcessedArray.Size = new Size(137, 15);
-            labelProcessedArray.TabIndex = 6;
-            labelProcessedArray.Text = "Обработанный массив:";
+            labelSolution.AutoSize = true;
+            labelSolution.Location = new Point(212, 3);
+            labelSolution.Name = "labelSolution";
+            labelSolution.Size = new Size(106, 15);
+            labelSolution.TabIndex = 6;
+            labelSolution.Text = "Решение задания:";
             // 
-            // buttonShowProcessedArray
+            // buttonShowSolution
             // 
-            buttonShowProcessedArray.Location = new Point(373, 78);
-            buttonShowProcessedArray.Name = "buttonShowProcessedArray";
-            buttonShowProcessedArray.Size = new Size(193, 23);
-            buttonShowProcessedArray.TabIndex = 2;
-            buttonShowProcessedArray.Text = "Вывести решение";
-            buttonShowProcessedArray.UseVisualStyleBackColor = true;
-            buttonShowProcessedArray.Click += ButtonShowProcessedArray_Click;
+            buttonShowSolution.Location = new Point(373, 78);
+            buttonShowSolution.Name = "buttonShowSolution";
+            buttonShowSolution.Size = new Size(193, 23);
+            buttonShowSolution.TabIndex = 2;
+            buttonShowSolution.Text = "Вывести решение";
+            buttonShowSolution.UseVisualStyleBackColor = true;
+            buttonShowSolution.Click += ButtonShowSolution_Click;
             // 
-            // textBoxProcessedArray
+            // textBoxSolution
             // 
-            textBoxProcessedArray.Location = new Point(212, 21);
-            textBoxProcessedArray.Multiline = true;
-            textBoxProcessedArray.Name = "textBoxProcessedArray";
-            textBoxProcessedArray.ReadOnly = true;
-            textBoxProcessedArray.Size = new Size(150, 150);
-            textBoxProcessedArray.TabIndex = 1;
+            textBoxSolution.Location = new Point(212, 21);
+            textBoxSolution.Multiline = true;
+            textBoxSolution.Name = "textBoxSolution";
+            textBoxSolution.ReadOnly = true;
+            textBoxSolution.Size = new Size(150, 150);
+            textBoxSolution.TabIndex = 1;
             // 
             // labelOptionalTask
             // 
@@ -397,7 +397,7 @@
         private Label labelGenerate;
         private TextBox textBoxOptionalTask;
         private Panel panelProcessedArray;
-        private TextBox textBoxProcessedArray;
+        private TextBox textBoxSolution;
         private NumericUpDown numericUpDownLength;
         private Label labelHeight;
         private Label labelLength;
@@ -406,10 +406,10 @@
         private NumericUpDown numericUpDownHeight;
         private Label labelMaxValue;
         private Label labelMinValue;
-        private Button buttonShowProcessedArray;
+        private Button buttonShowSolution;
         private Label labelInitialArray;
         private Label labelTask;
-        private Label labelProcessedArray;
+        private Label labelSolution;
         private Label labelOptionalTask;
         private Label labelGeneratingValues;
     }
