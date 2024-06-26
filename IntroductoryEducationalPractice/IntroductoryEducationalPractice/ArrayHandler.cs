@@ -57,6 +57,7 @@ public static class ArrayHandler
 
     public static string Task2(int[] array)
     {
+        return "";
     }
 
     public static string Task3(int[] array)
@@ -69,13 +70,89 @@ public static class ArrayHandler
         return "";
     }
 
-    public static string Task5(int[] array)
+    public static string Task5(int[,] array)
     {
-        return "";
+        int firstEvenRowIndex = -1, lastOddRowIndex = -1;
+        string differenceBetweenRows;
+
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                if (firstEvenRowIndex == -1 && array[i, j] % 2 == 0) firstEvenRowIndex = i;
+                if (array[i, j] % 2 == 1) lastOddRowIndex = i;
+            }
+        }
+
+        StringBuilder sb = new();
+        for (int i = 0; i < array.GetLength(1); i++)
+        {
+            sb.Append(array[firstEvenRowIndex, i] - array[lastOddRowIndex, i]);
+            sb.Append(' ');
+        }
+        sb.Append(Environment.NewLine);
+        differenceBetweenRows = sb.ToString();
+        sb.Clear();
+
+        bool withEvenNegative;
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            withEvenNegative = false;
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                if (array[i, j] % 2 == 0 && array[i, j] < 0) withEvenNegative = true;
+                sb.Append(array[i, j]);
+                sb.Append(' ');
+            }
+            sb.Append(Environment.NewLine);
+            if (withEvenNegative) sb.Append(differenceBetweenRows);
+        }
+
+        return sb.ToString();
     }
 
-    public static string Task6(int[] array)
+    public static string Task6(int[,] array)
     {
-        return "";
+        int rows = array.GetLength(0);
+        int cols = array.GetLength(1);
+        int n = 2 * (rows + cols - 2); 
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n - 1; j++)
+            {
+                (int currentRow, int currentCol) = GetPerimeterIndex(j, rows, cols);
+                (int nextRow, int nextCol) = GetPerimeterIndex(j + 1, rows, cols);
+
+                if (array[currentRow, currentCol] < array[nextRow, nextCol])
+                {
+                    int temp = array[currentRow, currentCol];
+                    array[currentRow, currentCol] = array[nextRow, nextCol];
+                    array[nextRow, nextCol] = temp;
+                }
+            }
+        }
+
+        StringBuilder sb = new();
+
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                sb.Append(array[i, j]);
+                sb.Append(' ');
+            }
+            sb.Append(Environment.NewLine);
+        }
+
+        return sb.ToString();
+    }
+
+    private static (int, int) GetPerimeterIndex(int index, int rows, int cols)
+    {
+        if (index < cols) return (0, index);
+        else if (index < cols + rows - 1) return (index - cols + 1, cols - 1);
+        else if (index < 2 * cols + rows - 2) return (rows - 1, 2 * cols + rows - 3 - index);
+        else return (2 * (rows + cols - 2) - index, 0);
     }
 }

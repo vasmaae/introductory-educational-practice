@@ -63,50 +63,80 @@ public partial class FormArray : Form
         textBoxMassive.Text = sb.ToString();
     }
 
-    private void GetArray1D(float relativeIncrease)
+    private void GetArray1D()
+    {
+        string[] array = textBoxMassive.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        _array2D = new int[0, 0];
+        _array1D = new int[array.Length];
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            _array1D[i] = int.Parse(array[i]);
+        }
+    }
+
+    private void GetArray2D()
+    {
+        string[] subarrays = textBoxMassive.Text.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+        _array1D = [];
+        _array2D = new int[subarrays.Length, subarrays[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Length];
+
+        string[] subarraySplited;
+        for (int i = 0; i < subarrays.Length; i++)
+        {
+            subarraySplited = subarrays[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            
+            for (int j = 0; j < subarraySplited.Length; j++)
+            {
+                _array2D[i, j] = int.Parse(subarraySplited[j]);
+            }
+        }
+    }
+
+    private void ButtonShowSolution_Click(object sender, EventArgs e)
     {
         try
         {
-            string[] array = textBoxMassive.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            _array1D = new int[(int) (array.Length * relativeIncrease) + 1];
-
-            for (int i = 0; i < array.Length; i++)
+            switch (_taskNumber)
             {
-                _array1D[i] = int.Parse(array[i]);
+                case 0:
+                    GetArray1D();
+                    textBoxSolution.Text = ArrayHandler.Task1(_array1D);
+                    break;
+
+                case 1:
+                    GetArray1D();
+                    textBoxSolution.Text = ArrayHandler.Task2(_array1D);
+                    break;
+
+                case 2:
+                    GetArray1D();
+                    textBoxSolution.Text = ArrayHandler.Task3(_array1D);
+                    break;
+
+                case 3:
+                    GetArray1D();
+                    textBoxSolution.Text = ArrayHandler.Task4(_array1D);
+                    break;
+
+                case 4:
+                    GetArray2D();
+                    textBoxSolution.Text = ArrayHandler.Task5(_array2D);
+                    break;
+
+                case 5:
+                    GetArray2D();
+                    textBoxSolution.Text = ArrayHandler.Task6(_array2D);
+                    break;
             }
         }
         catch (FormatException _)
         {
             MessageBox.Show("Ошибка", "Неверный формат ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-    }
-
-    private void ButtonShowSolution_Click(object sender, EventArgs e)
-    {
-        switch (_taskNumber)
+        catch (Exception _)
         {
-            case 0:
-                GetArray1D(1);
-                try
-                {
-                    textBoxSolution.Text = ArrayHandler.Task1(_array1D);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Недостаточно данных или данные не верны", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                break;
-            case 1:
-                GetArray1D(2);
-                //try
-                //{
-                    textBoxSolution.Text = ArrayHandler.Task2(_array1D);
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show("Недостаточно данных или данные не верны", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
-                break;
+            MessageBox.Show("Недостаточно данных или данные не верны", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
