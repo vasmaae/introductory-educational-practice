@@ -10,8 +10,8 @@ public partial class FormArray : Form
         "2.11",
         "3.11",
         "4.11",
-        "5.11",
-        "6.11",
+        "5.",
+        "6.",
     };
 
     private short _taskNumber = -1;

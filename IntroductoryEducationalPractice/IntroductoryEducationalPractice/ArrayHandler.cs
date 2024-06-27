@@ -213,39 +213,12 @@ public static class ArrayHandler
             sb.Append(' ');
         }
 
-        return sb.ToString();
+        return "";
     }
 
     public static string Task5(int[,] array, int startColumns)
     {
-        int firstPositiveColumnIndex = -1, lastNegativeColumnIndex = -1;
-
-        for (int i = 0; i < array.GetLength(1); i++)
-        {
-            for (int j = 0; j < array.GetLength(0); j++)
-            {
-                if (firstPositiveColumnIndex == -1 && array[j, i] >= 0) firstPositiveColumnIndex = i;
-                if (array[j, i] < 0) lastNegativeColumnIndex = i;
-
-            }
-        }
-
-        int[] absSumOfColumns = new int[array.GetLength(1)];
-        for (int i = 0; i < array.GetLength(1); i++)
-        {
-            absSumOfColumns[i] = Math.Abs(array[i, firstPositiveColumnIndex]) + Math.Abs(array[i, lastNegativeColumnIndex]);
-        }
-
-        int counter = 0;
-        for (int j = 0; j < array.GetLength(0); j++)
-        {
-            for (int i = 0; i < array.GetLength(1); i++)
-            {
-                
-            }
-        }
-
-        return "";
+        
     }
 
     public static string Task6(int[,] array)
