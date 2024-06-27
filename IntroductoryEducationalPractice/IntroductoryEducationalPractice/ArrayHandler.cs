@@ -57,102 +57,199 @@ public static class ArrayHandler
 
     public static string Task2(int[] array)
     {
-        return "";
-    }
+        int evenRangeStartIndex = -1, currentRangeStartIndex = 0;
+        int evenLength = 0, currentLength = 0;
+        int currentRangeOfEven = (array[0] % 2 == 0) ? 1 : -1;
+        int firstZeroIndex = -1;
 
-    public static string Task3(int[] array)
-    {
-        return "";
-    }
-
-    public static string Task4(int[] array)
-    {
-        return "";
-    }
-
-    public static string Task5(int[,] array)
-    {
-        int firstEvenRowIndex = -1, lastOddRowIndex = -1;
-        string differenceBetweenRows;
-
-        for (int i = 0; i < array.GetLength(0); i++)
+        for (int i = 0; i < array.Length; i++)
         {
-            for (int j = 0; j < array.GetLength(1); j++)
+            if (firstZeroIndex == -1 && array[i] == 0) firstZeroIndex = i;
+
+            int currentEven = (array[i] % 2 == 0) ? 1 : -1;
+
+            if (currentEven == currentRangeOfEven)
             {
-                if (firstEvenRowIndex == -1 && array[i, j] % 2 == 0) firstEvenRowIndex = i;
-                if (array[i, j] % 2 == 1) lastOddRowIndex = i;
+                currentLength++;
             }
-        }
 
-        StringBuilder sb = new();
-        for (int i = 0; i < array.GetLength(1); i++)
-        {
-            sb.Append(array[firstEvenRowIndex, i] - array[lastOddRowIndex, i]);
-            sb.Append(' ');
-        }
-        sb.Append(Environment.NewLine);
-        differenceBetweenRows = sb.ToString();
-        sb.Clear();
-
-        bool withEvenNegative;
-        for (int i = 0; i < array.GetLength(0); i++)
-        {
-            withEvenNegative = false;
-            for (int j = 0; j < array.GetLength(1); j++)
+            if (currentEven != currentRangeOfEven || i == array.Length - 1)
             {
-                if (array[i, j] % 2 == 0 && array[i, j] < 0) withEvenNegative = true;
-                sb.Append(array[i, j]);
-                sb.Append(' ');
-            }
-            sb.Append(Environment.NewLine);
-            if (withEvenNegative) sb.Append(differenceBetweenRows);
-        }
-
-        return sb.ToString();
-    }
-
-    public static string Task6(int[,] array)
-    {
-        int rows = array.GetLength(0);
-        int cols = array.GetLength(1);
-        int n = 2 * (rows + cols - 2); 
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n - 1; j++)
-            {
-                (int currentRow, int currentCol) = GetPerimeterIndex(j, rows, cols);
-                (int nextRow, int nextCol) = GetPerimeterIndex(j + 1, rows, cols);
-
-                if (array[currentRow, currentCol] < array[nextRow, nextCol])
+                if ((currentLength > evenLength) && currentRangeOfEven == 1)
                 {
-                    int temp = array[currentRow, currentCol];
-                    array[currentRow, currentCol] = array[nextRow, nextCol];
-                    array[nextRow, nextCol] = temp;
+                    evenLength = currentLength;
+                    evenRangeStartIndex = currentRangeStartIndex;
+                }
+
+                currentRangeOfEven = currentEven;
+                currentRangeStartIndex = i;
+                currentLength = 1;
+            }
+        }
+
+        if (evenLength >= 2 && firstZeroIndex != -1)
+        {
+            int temp;
+            if (evenRangeStartIndex > firstZeroIndex)
+            {
+                for (int i = 0; i < evenRangeStartIndex - firstZeroIndex - 1; i++)
+                {
+                    temp = array[firstZeroIndex + 1];
+                    for (int j = firstZeroIndex + 1; j < evenRangeStartIndex + evenLength - 1; j++)
+                    {
+                        array[j] = array[j + 1];
+                    }
+                    array[evenRangeStartIndex + evenLength - 1] = temp;
+                }
+            }
+            else
+            {
+                for (int l = 0; l < firstZeroIndex - evenRangeStartIndex - evenLength + 1; l++)
+                {
+                    temp = array[firstZeroIndex];
+                    for (int i = firstZeroIndex; i > evenRangeStartIndex; i--)
+                    {
+                        array[i] = array[i - 1];
+                    }
+                    array[evenRangeStartIndex] = temp;
                 }
             }
         }
 
         StringBuilder sb = new();
-
-        for (int i = 0; i < array.GetLength(0); i++)
+        if (evenLength < 2) sb.Append($"Четная серия: отсутствует ");
+        else sb.Append($"Четная серия: длина - {evenLength}, начало - {evenRangeStartIndex}");
+        sb.Append(Environment.NewLine);
+        if (firstZeroIndex == -1) sb.Append($"Нулей нет ");
+        else if (evenLength > 1)
         {
-            for (int j = 0; j < array.GetLength(1); j++)
+            for (int i = 0; i < array.Length; i++)
             {
-                sb.Append(array[i, j]);
+                sb.Append(array[i]);
                 sb.Append(' ');
             }
-            sb.Append(Environment.NewLine);
         }
 
         return sb.ToString();
     }
 
-    private static (int, int) GetPerimeterIndex(int index, int rows, int cols)
+    public static string Task3(int[] array, int startLength)
     {
-        if (index < cols) return (0, index);
-        else if (index < cols + rows - 1) return (index - cols + 1, cols - 1);
-        else if (index < 2 * cols + rows - 2) return (rows - 1, 2 * cols + rows - 3 - index);
-        else return (2 * (rows + cols - 2) - index, 0);
+        int currentRangeStartIndex = 0;
+        int currentLength = 0;
+        int currentRangeEven = (array[0] % 2 == 0) ? 1 : -1;
+
+        for (int i = 0; i < startLength; i++)
+        {
+            int currentEven = (array[i] % 2 == 0) ? 1 : -1;
+
+            if (currentEven == currentRangeEven)
+            {
+                currentLength++;
+            }
+
+            if ((currentEven != currentRangeEven || i == startLength - 1) && currentLength >= 2)
+            {
+                for (int j = array.Length - 1; j > currentRangeStartIndex + currentLength - 1; j--)
+                {
+                    array[j] = array[j - 1];
+                }
+
+                array[i++] = array[currentRangeStartIndex];
+
+                currentRangeEven = currentEven;
+                currentRangeStartIndex = i;
+                currentLength = 1;
+            }
+        }
+
+        StringBuilder sb = new();
+        for (int i = 0; i < array.Length; i++)
+        {
+            sb.Append(array[i]);
+            sb.Append(' ');
+        }
+
+        return sb.ToString();
+    }
+
+    public static string Task4(int[] array)
+    {
+        int lastRangeStartIndex = -1, currentRangeStartIndex = 0;
+        int lastLength = 0, currentLength = 0;
+        int currentRangeSign = (array[0] >= 0) ? 1 : -1;
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            int currentSign = (array[i] >= 0) ? 1 : -1;
+
+            if (currentSign == currentRangeSign)
+            {
+                currentLength++;
+            }
+
+            if ((currentSign != currentRangeSign || i == array.Length - 1) && currentLength >= 2)
+            {
+                currentRangeSign = currentSign;
+                lastRangeStartIndex = currentRangeStartIndex;
+                currentRangeStartIndex = i;
+                lastLength = currentLength;
+                currentLength = 1;
+            }
+        }
+
+        if (lastRangeStartIndex != -1)
+        {
+            for (int i = lastRangeStartIndex; i < array.Length - lastLength; i++)
+            {
+                array[i] = array[i + lastLength];
+            }
+        }
+
+        StringBuilder sb = new();
+        for (int i = 0; i < array.Length - lastLength; i++)
+        {
+            sb.Append(array[i]);
+            sb.Append(' ');
+        }
+
+        return sb.ToString();
+    }
+
+    public static string Task5(int[,] array, int startColumns)
+    {
+        int firstPositiveColumnIndex = -1, lastNegativeColumnIndex = -1;
+
+        for (int i = 0; i < array.GetLength(1); i++)
+        {
+            for (int j = 0; j < array.GetLength(0); j++)
+            {
+                if (firstPositiveColumnIndex == -1 && array[j, i] >= 0) firstPositiveColumnIndex = i;
+                if (array[j, i] < 0) lastNegativeColumnIndex = i;
+
+            }
+        }
+
+        int[] absSumOfColumns = new int[array.GetLength(1)];
+        for (int i = 0; i < array.GetLength(1); i++)
+        {
+            absSumOfColumns[i] = Math.Abs(array[i, firstPositiveColumnIndex]) + Math.Abs(array[i, lastNegativeColumnIndex]);
+        }
+
+        int counter = 0;
+        for (int j = 0; j < array.GetLength(0); j++)
+        {
+            for (int i = 0; i < array.GetLength(1); i++)
+            {
+                
+            }
+        }
+
+        return "";
+    }
+
+    public static string Task6(int[,] array)
+    {
+        return "";
     }
 }
