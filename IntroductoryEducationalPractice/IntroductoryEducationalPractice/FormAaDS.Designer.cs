@@ -29,56 +29,52 @@
         private void InitializeComponent()
         {
             panelADT = new Panel();
-            numericUpDownIndexOfDeleting = new NumericUpDown();
             buttonDelete = new Button();
             textBoxADTValues = new TextBox();
             buttonShow = new Button();
             buttonAdd = new Button();
-            textBoxDescription1 = new TextBox();
+            textBoxADTDescription = new TextBox();
             panelSort = new Panel();
+            buttonNextState = new Button();
+            buttonPrevState = new Button();
+            textBoxState = new TextBox();
+            buttonSortArray = new Button();
             buttonGenerateArray = new Button();
             textBoxSortedArray = new TextBox();
             textBoxSourceArray = new TextBox();
             textBoxSortAlgorithmDescription = new TextBox();
             panel3 = new Panel();
-            buttonSortArray = new Button();
-            textBox3 = new TextBox();
             textBoxAlgorithmDescription = new TextBox();
+            textBoxSource = new TextBox();
+            textBoxLongestIncreasingSubsequence = new TextBox();
+            buttonShowSubsequence = new Button();
             panelADT.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownIndexOfDeleting).BeginInit();
             panelSort.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panelADT
             // 
-            panelADT.Controls.Add(numericUpDownIndexOfDeleting);
             panelADT.Controls.Add(buttonDelete);
             panelADT.Controls.Add(textBoxADTValues);
             panelADT.Controls.Add(buttonShow);
             panelADT.Controls.Add(buttonAdd);
-            panelADT.Controls.Add(textBoxDescription1);
+            panelADT.Controls.Add(textBoxADTDescription);
             panelADT.Dock = DockStyle.Left;
             panelADT.Location = new Point(0, 0);
             panelADT.Name = "panelADT";
             panelADT.Size = new Size(183, 450);
             panelADT.TabIndex = 0;
             // 
-            // numericUpDownIndexOfDeleting
-            // 
-            numericUpDownIndexOfDeleting.Location = new Point(3, 227);
-            numericUpDownIndexOfDeleting.Name = "numericUpDownIndexOfDeleting";
-            numericUpDownIndexOfDeleting.Size = new Size(174, 23);
-            numericUpDownIndexOfDeleting.TabIndex = 4;
-            // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(3, 198);
+            buttonDelete.Location = new Point(0, 239);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(177, 23);
             buttonDelete.TabIndex = 2;
             buttonDelete.Text = "Удалить";
             buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += ButtonDelete_Click;
             // 
             // textBoxADTValues
             // 
@@ -98,6 +94,7 @@
             buttonShow.TabIndex = 3;
             buttonShow.Text = "Вывести";
             buttonShow.UseVisualStyleBackColor = true;
+            buttonShow.Click += ButtonShow_Click;
             // 
             // buttonAdd
             // 
@@ -107,20 +104,23 @@
             buttonAdd.TabIndex = 1;
             buttonAdd.Text = "Добавить";
             buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += ButtonAdd_Click;
             // 
-            // textBoxDescription1
+            // textBoxADTDescription
             // 
-            textBoxDescription1.Dock = DockStyle.Top;
-            textBoxDescription1.Location = new Point(0, 0);
-            textBoxDescription1.Multiline = true;
-            textBoxDescription1.Name = "textBoxDescription1";
-            textBoxDescription1.ReadOnly = true;
-            textBoxDescription1.Size = new Size(183, 131);
-            textBoxDescription1.TabIndex = 0;
+            textBoxADTDescription.Dock = DockStyle.Top;
+            textBoxADTDescription.Location = new Point(0, 0);
+            textBoxADTDescription.Multiline = true;
+            textBoxADTDescription.Name = "textBoxADTDescription";
+            textBoxADTDescription.ReadOnly = true;
+            textBoxADTDescription.Size = new Size(183, 131);
+            textBoxADTDescription.TabIndex = 0;
             // 
             // panelSort
             // 
-            panelSort.Controls.Add(textBox3);
+            panelSort.Controls.Add(buttonNextState);
+            panelSort.Controls.Add(buttonPrevState);
+            panelSort.Controls.Add(textBoxState);
             panelSort.Controls.Add(buttonSortArray);
             panelSort.Controls.Add(buttonGenerateArray);
             panelSort.Controls.Add(textBoxSortedArray);
@@ -132,6 +132,45 @@
             panelSort.Size = new Size(307, 450);
             panelSort.TabIndex = 1;
             // 
+            // buttonNextState
+            // 
+            buttonNextState.Location = new Point(3, 314);
+            buttonNextState.Name = "buttonNextState";
+            buttonNextState.Size = new Size(108, 23);
+            buttonNextState.TabIndex = 7;
+            buttonNextState.Text = "Вперёд";
+            buttonNextState.UseVisualStyleBackColor = true;
+            buttonNextState.Click += ButtonNextState_Click;
+            // 
+            // buttonPrevState
+            // 
+            buttonPrevState.Location = new Point(3, 291);
+            buttonPrevState.Name = "buttonPrevState";
+            buttonPrevState.Size = new Size(108, 23);
+            buttonPrevState.TabIndex = 6;
+            buttonPrevState.Text = "Назад";
+            buttonPrevState.UseVisualStyleBackColor = true;
+            buttonPrevState.Click += ButtonPrevState_Click;
+            // 
+            // textBoxState
+            // 
+            textBoxState.Location = new Point(117, 291);
+            textBoxState.Multiline = true;
+            textBoxState.Name = "textBoxState";
+            textBoxState.ReadOnly = true;
+            textBoxState.Size = new Size(184, 46);
+            textBoxState.TabIndex = 5;
+            // 
+            // buttonSortArray
+            // 
+            buttonSortArray.Location = new Point(3, 239);
+            buttonSortArray.Name = "buttonSortArray";
+            buttonSortArray.Size = new Size(108, 46);
+            buttonSortArray.TabIndex = 4;
+            buttonSortArray.Text = "Сортировать массив";
+            buttonSortArray.UseVisualStyleBackColor = true;
+            buttonSortArray.Click += ButtonSortArray_Click;
+            // 
             // buttonGenerateArray
             // 
             buttonGenerateArray.Location = new Point(6, 137);
@@ -140,10 +179,11 @@
             buttonGenerateArray.TabIndex = 3;
             buttonGenerateArray.Text = "Генерировать массив";
             buttonGenerateArray.UseVisualStyleBackColor = true;
+            buttonGenerateArray.Click += ButtonGenerateArray_Click;
             // 
             // textBoxSortedArray
             // 
-            textBoxSortedArray.Location = new Point(120, 189);
+            textBoxSortedArray.Location = new Point(117, 239);
             textBoxSortedArray.Multiline = true;
             textBoxSortedArray.Name = "textBoxSortedArray";
             textBoxSortedArray.ReadOnly = true;
@@ -170,30 +210,15 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(buttonShowSubsequence);
+            panel3.Controls.Add(textBoxLongestIncreasingSubsequence);
+            panel3.Controls.Add(textBoxSource);
             panel3.Controls.Add(textBoxAlgorithmDescription);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(490, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(310, 450);
+            panel3.Size = new Size(193, 450);
             panel3.TabIndex = 1;
-            // 
-            // buttonSortArray
-            // 
-            buttonSortArray.Location = new Point(6, 189);
-            buttonSortArray.Name = "buttonSortArray";
-            buttonSortArray.Size = new Size(108, 46);
-            buttonSortArray.TabIndex = 4;
-            buttonSortArray.Text = "Сортировать массив";
-            buttonSortArray.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(120, 241);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(184, 46);
-            textBox3.TabIndex = 5;
             // 
             // textBoxAlgorithmDescription
             // 
@@ -202,14 +227,41 @@
             textBoxAlgorithmDescription.Multiline = true;
             textBoxAlgorithmDescription.Name = "textBoxAlgorithmDescription";
             textBoxAlgorithmDescription.ReadOnly = true;
-            textBoxAlgorithmDescription.Size = new Size(310, 131);
+            textBoxAlgorithmDescription.Size = new Size(193, 131);
             textBoxAlgorithmDescription.TabIndex = 1;
+            // 
+            // textBoxSource
+            // 
+            textBoxSource.Location = new Point(6, 138);
+            textBoxSource.Multiline = true;
+            textBoxSource.Name = "textBoxSource";
+            textBoxSource.Size = new Size(184, 46);
+            textBoxSource.TabIndex = 2;
+            // 
+            // textBoxLongestIncreasingSubsequence
+            // 
+            textBoxLongestIncreasingSubsequence.Location = new Point(6, 190);
+            textBoxLongestIncreasingSubsequence.Multiline = true;
+            textBoxLongestIncreasingSubsequence.Name = "textBoxLongestIncreasingSubsequence";
+            textBoxLongestIncreasingSubsequence.ReadOnly = true;
+            textBoxLongestIncreasingSubsequence.Size = new Size(184, 46);
+            textBoxLongestIncreasingSubsequence.TabIndex = 3;
+            // 
+            // buttonShowSubsequence
+            // 
+            buttonShowSubsequence.Location = new Point(6, 242);
+            buttonShowSubsequence.Name = "buttonShowSubsequence";
+            buttonShowSubsequence.Size = new Size(184, 23);
+            buttonShowSubsequence.TabIndex = 4;
+            buttonShowSubsequence.Text = "Показать";
+            buttonShowSubsequence.UseVisualStyleBackColor = true;
+            buttonShowSubsequence.Click += buttonShowSubsequence_Click;
             // 
             // FormAaDS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(683, 450);
             Controls.Add(panel3);
             Controls.Add(panelSort);
             Controls.Add(panelADT);
@@ -217,7 +269,6 @@
             Text = "FormAaDS";
             panelADT.ResumeLayout(false);
             panelADT.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownIndexOfDeleting).EndInit();
             panelSort.ResumeLayout(false);
             panelSort.PerformLayout();
             panel3.ResumeLayout(false);
@@ -231,17 +282,21 @@
         private Button buttonShow;
         private Button buttonDelete;
         private Button buttonAdd;
-        private TextBox textBoxDescription1;
+        private TextBox textBoxADTDescription;
         private Panel panelSort;
         private Panel panel3;
         private TextBox textBoxADTValues;
-        private NumericUpDown numericUpDownIndexOfDeleting;
         private TextBox textBoxSortAlgorithmDescription;
         private TextBox textBoxSortedArray;
         private TextBox textBoxSourceArray;
         private Button buttonGenerateArray;
-        private TextBox textBox3;
+        private TextBox textBoxState;
         private Button buttonSortArray;
         private TextBox textBoxAlgorithmDescription;
+        private Button buttonNextState;
+        private Button buttonPrevState;
+        private Button buttonShowSubsequence;
+        private TextBox textBoxLongestIncreasingSubsequence;
+        private TextBox textBoxSource;
     }
 }
