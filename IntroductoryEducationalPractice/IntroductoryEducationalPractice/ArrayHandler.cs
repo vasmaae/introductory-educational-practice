@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Drawing.Drawing2D;
+using System.Text;
 
 namespace IntroductoryEducationalPractice;
 
@@ -285,23 +286,24 @@ public static class ArrayHandler
     public static string Task6(int[,] array)
     {
         int n = array.GetLength(0);
+        int temp;
 
-        for (int i = 0; i < n; i++)
+        for (int k = 0; k < n; k++)
         {
-            for (int j = i + 1; j < n; j++)
+            for (int i = 0; i < n - 1; i++)
             {
-                for (int k = 0; k < n; k++)
+                for (int j = i + 1; j < n; j++)
                 {
-                    for (int l = k + 1; l < n; l++)
+                    for (int m = 0; m < n - 1; m++)
                     {
-                        if (k <= i && l <= j)
-                            continue;
-
-                        if (array[i, j] < array[k, l])
+                        for (int l = m + 1; l < n; l++)
                         {
-                            int temp = array[i, j];
-                            array[i, j] = array[k, l];
-                            array[k, l] = temp;
+                            if (array[m, l] < array[i, j] && m < l && i < j)
+                            {
+                                temp = array[m, l];
+                                array[m, l] = array[i, j];
+                                array[i, j] = temp;
+                            }
                         }
                     }
                 }
