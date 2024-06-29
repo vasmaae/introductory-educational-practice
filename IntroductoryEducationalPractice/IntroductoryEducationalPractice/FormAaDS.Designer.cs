@@ -44,10 +44,11 @@
             textBoxSourceArray = new TextBox();
             textBoxSortAlgorithmDescription = new TextBox();
             panel3 = new Panel();
-            textBoxAlgorithmDescription = new TextBox();
-            textBoxSource = new TextBox();
-            textBoxLongestIncreasingSubsequence = new TextBox();
             buttonShowSubsequence = new Button();
+            textBoxLongestIncreasingSubsequence = new TextBox();
+            textBoxSource = new TextBox();
+            textBoxAlgorithmDescription = new TextBox();
+            textBox1 = new TextBox();
             panelADT.SuspendLayout();
             panelSort.SuspendLayout();
             panel3.SuspendLayout();
@@ -55,6 +56,7 @@
             // 
             // panelADT
             // 
+            panelADT.Controls.Add(textBox1);
             panelADT.Controls.Add(buttonDelete);
             panelADT.Controls.Add(textBoxADTValues);
             panelADT.Controls.Add(buttonShow);
@@ -220,23 +222,15 @@
             panel3.Size = new Size(193, 450);
             panel3.TabIndex = 1;
             // 
-            // textBoxAlgorithmDescription
+            // buttonShowSubsequence
             // 
-            textBoxAlgorithmDescription.Dock = DockStyle.Top;
-            textBoxAlgorithmDescription.Location = new Point(0, 0);
-            textBoxAlgorithmDescription.Multiline = true;
-            textBoxAlgorithmDescription.Name = "textBoxAlgorithmDescription";
-            textBoxAlgorithmDescription.ReadOnly = true;
-            textBoxAlgorithmDescription.Size = new Size(193, 131);
-            textBoxAlgorithmDescription.TabIndex = 1;
-            // 
-            // textBoxSource
-            // 
-            textBoxSource.Location = new Point(6, 138);
-            textBoxSource.Multiline = true;
-            textBoxSource.Name = "textBoxSource";
-            textBoxSource.Size = new Size(184, 46);
-            textBoxSource.TabIndex = 2;
+            buttonShowSubsequence.Location = new Point(6, 242);
+            buttonShowSubsequence.Name = "buttonShowSubsequence";
+            buttonShowSubsequence.Size = new Size(184, 23);
+            buttonShowSubsequence.TabIndex = 4;
+            buttonShowSubsequence.Text = "Показать";
+            buttonShowSubsequence.UseVisualStyleBackColor = true;
+            buttonShowSubsequence.Click += ButtonShowMinDistance_Click;
             // 
             // textBoxLongestIncreasingSubsequence
             // 
@@ -247,15 +241,30 @@
             textBoxLongestIncreasingSubsequence.Size = new Size(184, 46);
             textBoxLongestIncreasingSubsequence.TabIndex = 3;
             // 
-            // buttonShowSubsequence
+            // textBoxSource
             // 
-            buttonShowSubsequence.Location = new Point(6, 242);
-            buttonShowSubsequence.Name = "buttonShowSubsequence";
-            buttonShowSubsequence.Size = new Size(184, 23);
-            buttonShowSubsequence.TabIndex = 4;
-            buttonShowSubsequence.Text = "Показать";
-            buttonShowSubsequence.UseVisualStyleBackColor = true;
-            buttonShowSubsequence.Click += buttonShowSubsequence_Click;
+            textBoxSource.Location = new Point(6, 138);
+            textBoxSource.Multiline = true;
+            textBoxSource.Name = "textBoxSource";
+            textBoxSource.Size = new Size(184, 46);
+            textBoxSource.TabIndex = 2;
+            // 
+            // textBoxAlgorithmDescription
+            // 
+            textBoxAlgorithmDescription.Dock = DockStyle.Top;
+            textBoxAlgorithmDescription.Location = new Point(0, 0);
+            textBoxAlgorithmDescription.Multiline = true;
+            textBoxAlgorithmDescription.Name = "textBoxAlgorithmDescription";
+            textBoxAlgorithmDescription.ReadOnly = true;
+            textBoxAlgorithmDescription.Size = new Size(193, 131);
+            textBoxAlgorithmDescription.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(3, 268);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(174, 23);
+            textBox1.TabIndex = 6;
             // 
             // FormAaDS
             // 
@@ -298,5 +307,6 @@
         private Button buttonShowSubsequence;
         private TextBox textBoxLongestIncreasingSubsequence;
         private TextBox textBoxSource;
+        private TextBox textBox1;
     }
 }

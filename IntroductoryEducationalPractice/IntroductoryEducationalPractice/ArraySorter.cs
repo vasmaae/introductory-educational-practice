@@ -6,6 +6,8 @@ public class ArraySorter
     public int[] SourceArray;
     public int[] SortedArray;
 
+    const int INSERTION_SORT_THRESHOLD = 16;
+
     public ArraySorter(int[] arrayForSorting)
     {
         SourceArray = new int[arrayForSorting.Length];
@@ -15,107 +17,133 @@ public class ArraySorter
 
         StateStorage = new();
         StateStorage.Add(SourceArray);
-        SmoothSort(SortedArray);
+        Introsort(SortedArray);
     }
 
-    private static int Leonardo(int k)
+    public void Introsort(int[] array)
     {
-        if (k < 2)
-            return 1;
-        return Leonardo(k - 1) + Leonardo(k - 2) + 1;
+        int depthLimit = 2 * FloorLog2(array.Length);
+        IntroSort(array, 0, array.Length - 1, depthLimit);
     }
 
-    private void Heapify(int[] arr, int start, int end)
+    private void IntroSort(int[] array, int lo, int hi, int depthLimit)
     {
-        int i = start;
-        int j = 0;
-        int k = 0;
-
-        while (k < end - start + 1)
+        while (hi > lo)
         {
-            if ((k & 0xAAAAAAAA) != 0)
-            {
-                j += i;
-                i >>= 1;
-            }
-            else
-            {
-                i += j;
-                j >>= 1;
-            }
-            k++;
-        }
+            int size = hi - lo + 1;
 
-        while (i > 0)
-        {
-            j >>= 1;
-            k = i + j;
-
-            while (k < end)
+            if (size <= INSERTION_SORT_THRESHOLD)
             {
-                if (arr[k] > arr[k - i])
-                    break;
-
-                Swap(ref arr[k], ref arr[k - i]);
-                int[] tmpArr = new int[arr.Length];
-                Array.Copy(arr, tmpArr, arr.Length);
-                StateStorage.Add(tmpArr);
-                k += i;
+                InsertionSort(array, lo, hi);
+                return;
             }
-            i = j;
+
+            if (depthLimit == 0)
+            {
+                Heapsort(array, lo, hi);
+                return;
+            }
+
+            depthLimit--;
+            int p = Partition(array, lo, hi);
+            IntroSort(array, p + 1, hi, depthLimit);
+            hi = p - 1;
         }
     }
 
-    public void SmoothSort(int[] arr)
+    private int Partition(int[] array, int lo, int hi)
     {
-        int n = arr.Length;
-        int p = n - 1;
-        int q = p;
-        int r = 0;
+        int pivot = array[hi];
+        int i = lo;
 
-        while (p > 0)
+        for (int j = lo; j < hi; j++)
         {
-            if ((r & 0x03) == 0)
-                Heapify(arr, r, q);
-
-            if (Leonardo(r) == p)
-                r++;
-            else
+            if (array[j] < pivot)
             {
-                r--;
-                q -= Leonardo(r);
-                Heapify(arr, r, q);
-                q = r - 1;
-                r++;
+                Swap(array, i, j);
+                i++;
             }
-
-            Swap(ref arr[0], ref arr[p]);
-            int[] tmpArr = new int[arr.Length];
-            Array.Copy(arr, tmpArr, arr.Length);
-            StateStorage.Add(tmpArr);
-            p--;
         }
 
-        for (int i = 0; i < n - 1; i++)
+        Swap(array, i, hi);
+        return i;
+    }
+
+    private void Heapsort(int[] array, int lo, int hi)
+    {
+        int n = hi - lo + 1;
+        for (int i = n / 2 - 1; i >= 0; i--)
         {
-            int j = i + 1;
-            while (j > 0 && arr[j] < arr[j - 1])
+            Heapify(array, n, i, lo);
+        }
+
+        for (int i = n - 1; i > 0; i--)
+        {
+            Swap(array, lo, lo + i);
+            Heapify(array, i, 0, lo);
+        }
+    }
+
+    private void Heapify(int[] array, int n, int i, int lo)
+    {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left < n && array[lo + left] > array[lo + largest])
+        {
+            largest = left;
+        }
+
+        if (right < n && array[lo + right] > array[lo + largest])
+        {
+            largest = right;
+        }
+
+        if (largest != i)
+        {
+            Swap(array, lo + i, lo + largest);
+            Heapify(array, n, largest, lo);
+        }
+    }
+
+    private void InsertionSort(int[] array, int lo, int hi)
+    {
+        for (int i = lo + 1; i <= hi; i++)
+        {
+            int key = array[i];
+            int j = i - 1;
+
+            while (j >= lo && array[j] > key)
             {
-                Swap(ref arr[j], ref arr[j - 1]);
-                int[] tmpArr = new int[arr.Length];
-                Array.Copy(arr, tmpArr, arr.Length);
-                StateStorage.Add(tmpArr);
+                array[j + 1] = array[j];
                 j--;
             }
+
+            array[j + 1] = key;
         }
     }
 
-    private static void Swap(ref int a, ref int b)
+    private void Swap(int[] array, int i, int j)
     {
-        int temp = a;
-        a = b;
-        b = temp;
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
+        StateStorage.Add((int[])array.Clone());
     }
+
+    private int FloorLog2(int n)
+    {
+        int result = 0;
+        while (n >= 1)
+        {
+            result++;
+            n /= 2;
+        }
+        return result;
+    }
+
 
     public class ArraySorterStateStorage
     {

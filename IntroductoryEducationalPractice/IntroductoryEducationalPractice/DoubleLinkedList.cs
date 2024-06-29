@@ -1,8 +1,6 @@
-﻿using System.Collections;
+﻿namespace IntroductoryEducationalPractice;
 
-namespace IntroductoryEducationalPractice;
-
-public class DoubleLinkedList<T> : IEnumerable<T>
+public class DoubleLinkedList<T>/* : IEnumerable<T>*/
 {
     private Node<T>? head;
     private Node<T>? tail;
@@ -213,33 +211,33 @@ public class DoubleLinkedList<T> : IEnumerable<T>
         throw new ArgumentOutOfRangeException(nameof(index));
     }
 
-    public IEnumerator<T> GetEnumerator()
+    //public IEnumerator<T> GetEnumerator()
+    //{
+    //    Node<T> current = head;
+
+    //    while (current != null)
+    //    {
+    //        yield return current.Data;
+    //        current = current.Next;
+    //    }
+    //}
+
+    //IEnumerator IEnumerable.GetEnumerator()
+    //{
+    //    return GetEnumerator();
+    //}
+}
+
+public class Node<T>
+{
+    public Node<T>? Next { get; set; }
+    public Node<T>? Previous { get; set; }
+    public T Data { get; set; }
+
+    public Node(T value)
     {
-        Node<T> current = head;
-
-        while (current != null)
-        {
-            yield return current.Data;
-            current = current.Next;
-        }
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    private class Node<T>
-    {
-        public Node<T>? Next { get; set; }
-        public Node<T>? Previous { get; set; }
-        public T Data { get; set; }
-
-        public Node(T value)
-        {
-            Data = value;
-            Next = null;
-            Previous = null;
-        }
+        Data = value;
+        Next = null;
+        Previous = null;
     }
 }

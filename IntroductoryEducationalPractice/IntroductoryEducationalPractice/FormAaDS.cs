@@ -5,7 +5,8 @@ namespace IntroductoryEducationalPractice;
 public partial class FormAaDS : Form
 {
     private Random random = new();
-    private Queue<int> queue = new();
+
+    CircularList<int> list = new();
 
     private ArraySorter sorter;
     private int step = 0;
@@ -17,17 +18,17 @@ public partial class FormAaDS : Form
 
     private void ButtonAdd_Click(object sender, EventArgs e)
     {
-        queue.Enqueue(random.Next(-20, 20));
+        list.Add(random.Next(-20, 20));
     }
 
     private void ButtonDelete_Click(object sender, EventArgs e)
     {
-        queue.Dequeue();
+        list.Remove(int.Parse(textBox1.Text));
     }
 
     private void ButtonShow_Click(object sender, EventArgs e)
     {
-        textBoxADTValues.Text = string.Join(' ', queue.list);
+        textBoxADTValues.Text = list.GetString();
     }
 
     private void ButtonGenerateArray_Click(object sender, EventArgs e)
@@ -36,7 +37,7 @@ public partial class FormAaDS : Form
         {
             StringBuilder sb = new();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 50; i++)
             {
                 sb.Append(random.Next(-20, 20));
                 sb.Append(' ');
@@ -70,14 +71,10 @@ public partial class FormAaDS : Form
         textBoxState.Text = string.Join(' ', sorter.StateStorage.States[(step == 0) ? 0 : --step]);
     }
 
-    private void buttonShowSubsequence_Click(object sender, EventArgs e)
+    private void ButtonShowMinDistance_Click(object sender, EventArgs e)
     {
         string[] strArray = textBoxSource.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        int[] array = new int[strArray.Length];
-        for (int i = 0; i < array.Length; i++)
-        {
-            array[i] = int.Parse(strArray[i]);
-        }
-        textBoxLongestIncreasingSubsequence.Text = string.Join(' ', LongestIncreasingSubsequence.GetLongestIncreasingSubsequence(array));
+        string str1 = strArray[0], str2 = strArray[1];
+        textBoxLongestIncreasingSubsequence.Text = EditDistance.MinDistance(str1, str2).ToString();
     }
 }
