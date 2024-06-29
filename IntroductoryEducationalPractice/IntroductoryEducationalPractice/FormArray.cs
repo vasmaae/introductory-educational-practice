@@ -10,8 +10,8 @@ public partial class FormArray : Form
         "2.11",
         "3.11",
         "4.11",
-        "5.",
-        "6.",
+        "5.12",
+        "6.12",
     };
 
     private short _taskNumber = -1;
@@ -81,7 +81,9 @@ public partial class FormArray : Form
     {
         string[] subarrays = textBoxMassive.Text.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
         _array1D = [];
-        int startRows = subarrays.Length, startColumns = subarrays[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+        Console.Write(subarrays.Length);
+        int startRows = subarrays.Length, 
+            startColumns = subarrays[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
         _array2D = new int[(int) (startRows * increaseRows), (int) (startColumns * increaseColumns)];
 
         string[] subarraySplited;
@@ -90,7 +92,7 @@ public partial class FormArray : Form
             subarraySplited = subarrays[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
             
             for (int j = 0; j < subarraySplited.Length; j++)
-            {
+            { 
                 _array2D[i, j] = int.Parse(subarraySplited[j]);
             }
         }
@@ -125,8 +127,8 @@ public partial class FormArray : Form
                     break;
 
                 case 4:
-                    (int startRows, int startColumns) = GetArray2D(1, 2);
-                    textBoxSolution.Text = ArrayHandler.Task5(_array2D, startColumns);
+                    (int startRows, int startColumns) = GetArray2D(2.0f, 1);
+                    textBoxSolution.Text = ArrayHandler.Task5(_array2D, startRows);
                     break;
 
                 case 5:

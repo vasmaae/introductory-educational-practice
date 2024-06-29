@@ -216,13 +216,109 @@ public static class ArrayHandler
         return "";
     }
 
-    public static string Task5(int[,] array, int startColumns)
+    public static string Task5(int[,] array, int startRows)
     {
-        
+        int min = array[0, 0], max = array[0, 0];
+        int minRow = -1, maxRow = -1;
+        int negativeCount = 0;
+
+        for (int i = 0; i < startRows; i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                if (minRow == -1 && maxRow == -1)
+                {
+                    for (int x = 0; x < startRows; x++)
+                    {
+                        for (int y = 0; y < array.GetLength(1); y++)
+                        {
+                            if (array[x, y] > max)
+                            {
+                                max = array[x, y];
+                                maxRow = x;
+                            }
+                            if (array[x, y] < min)
+                            {
+                                min = array[x, y];
+                                minRow = x;
+                            }
+                        }
+                    }
+                }
+                if (array[i, j] < 0) negativeCount++;
+            }
+
+            if (negativeCount % 2 == 0 && negativeCount != 0)
+            {
+                for (int x = startRows; x > i; x--)
+                {
+                    for (int y = 0; y < array.GetLength(1); y++)
+                    {
+                        array[x + 1, y] = array[x, y];
+                    }
+                }
+                startRows++;
+                if (maxRow > i) maxRow++;
+                if (minRow > i) minRow++;
+                for (int x = 0; x < array.GetLength(1); x++)
+                {
+                    array[i + 1, x] = array[maxRow, x] + array[minRow, x];
+                }
+                i++;
+            }
+            negativeCount = 0;
+        }
+
+        StringBuilder sb = new();
+        for (int i = 0; i < startRows; i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                sb.Append(array[i, j]);
+                sb.Append(' ');
+            }
+            sb.Append(Environment.NewLine);
+        }
+        return sb.ToString();
     }
 
     public static string Task6(int[,] array)
     {
-        return "";
+        int n = array.GetLength(0);
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i + 1; j < n; j++)
+            {
+                for (int k = 0; k < n; k++)
+                {
+                    for (int l = k + 1; l < n; l++)
+                    {
+                        if (k <= i && l <= j)
+                            continue;
+
+                        if (array[i, j] < array[k, l])
+                        {
+                            int temp = array[i, j];
+                            array[i, j] = array[k, l];
+                            array[k, l] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        StringBuilder sb = new();
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                sb.Append(array[i, j]);
+                sb.Append(' ');
+            }
+            sb.Append(Environment.NewLine);
+        }
+        return sb.ToString();
     }
 }
