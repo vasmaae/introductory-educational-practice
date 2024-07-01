@@ -1,3 +1,7 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+
 namespace IntroductoryEducationalPractice
 {
     internal static class Program
@@ -11,7 +15,24 @@ namespace IntroductoryEducationalPractice
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            ServiceCollection services = new();
+            
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("serilog.json")
+                .Build();
+
+
+            services.AddSingleton<FormLogging>()
+                    .AddLogging(builder =>
+                    {
+                        builder.AddSerilog(new LoggerConfiguration()
+                            .ReadFrom.Configuration(configuration)
+                            .CreateLogger());
+                    });
+
+            using ServiceProvider serviceProvider = services.BuildServiceProvider();
+            Application.Run(serviceProvider.GetRequiredService<FormLogging>());
         }
     }
 }
