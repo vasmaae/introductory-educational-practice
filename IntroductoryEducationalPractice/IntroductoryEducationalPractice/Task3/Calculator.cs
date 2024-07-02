@@ -6,6 +6,6 @@ public class Calculator<T> where T : struct
     {
         dynamic a1 = a;
         dynamic b1 = b;
-        return a1 * b1;
+        return a1 - b1;
     }
 }

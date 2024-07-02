@@ -83,7 +83,7 @@ public class MyObject
 
     public override string ToString()
     {
-        return $"*ПРЕДМЕТ МЕБЕЛИ*: " +
+        return $"Стол: " +
             $"Ширина - {_width}, " +
             $"Длина - {_length}, " +
             $"Высота - {_height}, " +

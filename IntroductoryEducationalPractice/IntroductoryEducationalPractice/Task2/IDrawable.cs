@@ -2,5 +2,5 @@
 
 public interface IDrawable
 {
-    public void Draw(PictureBox pictureBox);
+    public void Draw(Graphics g);
 }

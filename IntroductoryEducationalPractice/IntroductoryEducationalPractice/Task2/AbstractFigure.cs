@@ -1,6 +1,7 @@
-﻿namespace IntroductoryEducationalPractice.Task2;
+﻿
+namespace IntroductoryEducationalPractice.Task2;
 
-public abstract class AbstractFigure
+public abstract class AbstractFigure : IDrawable
 {
     public abstract double Width { get; set; }
     public abstract double Height { get; set; }
@@ -21,4 +22,13 @@ public abstract class AbstractFigure
     public abstract double Area();
 
     public abstract double Perimeter();
+
+    public void Draw(Graphics g)
+    {
+        Pen pen = new(Color.Black, 3);
+        Brush brush = new SolidBrush(Color.Black);
+        DrawFigure(g, pen, brush);
+    }
+
+    protected abstract void DrawFigure(Graphics g, Pen pen, Brush brush);
 }

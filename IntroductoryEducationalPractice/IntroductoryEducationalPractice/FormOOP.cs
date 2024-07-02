@@ -25,7 +25,7 @@ public partial class FormOOP : Form
             obj.Height = double.Parse(textBoxHeight.Text);
             obj.CountOfLegs = int.Parse(numericUpDownCountOfLegs.Text);
             obj.Name = textBoxName.Text;
-            obj.IsFolding = 
+            obj.IsFolding =
                 (radioButtonIsFolding.Checked == true) ? true :
                 ((radioButtonIsNotFolding.Checked == true) ? false :
                 null);
@@ -46,22 +46,19 @@ public partial class FormOOP : Form
     private void ButtonShowObjects_Click(object sender, EventArgs e)
     {
         listBoxObjects.Items.Clear();
-        foreach (MyObject obj in objects)
-        {
-            listBoxObjects.Items.Add(obj.ToString());
-        }
+        foreach (MyObject obj in objects) listBoxObjects.Items.Add(obj.ToString());
     }
 
     private void ButtonCreateFigure_Click(object sender, EventArgs e)
     {
-        Figure figure = new(int.Parse(textBoxFigureWidth.Text), int.Parse(textBoxFigureHeight.Text));
+        AbstractFigure figure = new Task2.Rectangle(int.Parse(textBoxFigureWidth.Text), int.Parse(textBoxFigureHeight.Text));
         figures.Add(figure);
         listBoxFigures.Items.Add(figure);
     }
 
     private void ButtonCreateFilledFigure_Click(object sender, EventArgs e)
     {
-        AbstractFigure filledFigure = new FilledFigure(int.Parse(textBoxFigureWidth.Text), int.Parse(textBoxFigureHeight.Text));
+        AbstractFigure filledFigure = new FilledCircle(int.Parse(textBoxFigureWidth.Text), int.Parse(textBoxFigureHeight.Text));
         figures.Add(filledFigure);
         listBoxFigures.Items.Add(filledFigure);
     }
@@ -69,7 +66,10 @@ public partial class FormOOP : Form
     private void ButtonShowFigure_Click(object sender, EventArgs e)
     {
         IDrawable figure = (IDrawable)figures[listBoxFigures.SelectedIndex];
-        figure.Draw(pictureBoxFigure);
+        Bitmap bitmap = new(pictureBoxFigure.Width, pictureBoxFigure.Height);
+        Graphics g = Graphics.FromImage(bitmap);
+        figure.Draw(g);
+        pictureBoxFigure.Image = bitmap;
     }
 
     private void ButtonCalculate_Click(object sender, EventArgs e)

@@ -57,12 +57,12 @@
             textBoxFigureWidth = new TextBox();
             pictureBoxFigure = new PictureBox();
             tabTask3 = new TabPage();
-            textBoxValue1 = new TextBox();
-            textBoxValue2 = new TextBox();
-            textBoxResult = new TextBox();
-            labelValue1 = new Label();
-            labelValue2 = new Label();
             buttonCalculate = new Button();
+            labelValue2 = new Label();
+            labelValue1 = new Label();
+            textBoxResult = new TextBox();
+            textBoxValue2 = new TextBox();
+            textBoxValue1 = new TextBox();
             tabControl.SuspendLayout();
             tabTask1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCountOfLegs).BeginInit();
@@ -295,7 +295,7 @@
             buttonCreateFilledFigure.Name = "buttonCreateFilledFigure";
             buttonCreateFilledFigure.Size = new Size(100, 69);
             buttonCreateFilledFigure.TabIndex = 6;
-            buttonCreateFilledFigure.Text = "Создать закрашенный ...";
+            buttonCreateFilledFigure.Text = "Создать закрашенный круг";
             buttonCreateFilledFigure.UseVisualStyleBackColor = true;
             buttonCreateFilledFigure.Click += ButtonCreateFilledFigure_Click;
             // 
@@ -305,7 +305,7 @@
             buttonCreateFigure.Name = "buttonCreateFigure";
             buttonCreateFigure.Size = new Size(100, 69);
             buttonCreateFigure.TabIndex = 5;
-            buttonCreateFigure.Text = "Создать ...";
+            buttonCreateFigure.Text = "Создать прямоугольник";
             buttonCreateFigure.UseVisualStyleBackColor = true;
             buttonCreateFigure.Click += ButtonCreateFigure_Click;
             // 
@@ -366,36 +366,15 @@
             tabTask3.Text = "Задание 3";
             tabTask3.UseVisualStyleBackColor = true;
             // 
-            // textBoxValue1
+            // buttonCalculate
             // 
-            textBoxValue1.Location = new Point(79, 11);
-            textBoxValue1.Name = "textBoxValue1";
-            textBoxValue1.Size = new Size(100, 23);
-            textBoxValue1.TabIndex = 0;
-            // 
-            // textBoxValue2
-            // 
-            textBoxValue2.Location = new Point(79, 40);
-            textBoxValue2.Name = "textBoxValue2";
-            textBoxValue2.Size = new Size(100, 23);
-            textBoxValue2.TabIndex = 1;
-            // 
-            // textBoxResult
-            // 
-            textBoxResult.Location = new Point(6, 98);
-            textBoxResult.Name = "textBoxResult";
-            textBoxResult.ReadOnly = true;
-            textBoxResult.Size = new Size(173, 23);
-            textBoxResult.TabIndex = 2;
-            // 
-            // labelValue1
-            // 
-            labelValue1.AutoSize = true;
-            labelValue1.Location = new Point(6, 14);
-            labelValue1.Name = "labelValue1";
-            labelValue1.Size = new Size(67, 15);
-            labelValue1.TabIndex = 3;
-            labelValue1.Text = "1 значение";
+            buttonCalculate.Location = new Point(8, 69);
+            buttonCalculate.Name = "buttonCalculate";
+            buttonCalculate.Size = new Size(171, 23);
+            buttonCalculate.TabIndex = 5;
+            buttonCalculate.Text = "Вычислить операцию";
+            buttonCalculate.UseVisualStyleBackColor = true;
+            buttonCalculate.Click += ButtonCalculate_Click;
             // 
             // labelValue2
             // 
@@ -406,15 +385,36 @@
             labelValue2.TabIndex = 4;
             labelValue2.Text = "2 значение";
             // 
-            // buttonCalculate
+            // labelValue1
             // 
-            buttonCalculate.Location = new Point(8, 69);
-            buttonCalculate.Name = "buttonCalculate";
-            buttonCalculate.Size = new Size(171, 23);
-            buttonCalculate.TabIndex = 5;
-            buttonCalculate.Text = "Вычислить операцию";
-            buttonCalculate.UseVisualStyleBackColor = true;
-            buttonCalculate.Click += ButtonCalculate_Click;
+            labelValue1.AutoSize = true;
+            labelValue1.Location = new Point(6, 14);
+            labelValue1.Name = "labelValue1";
+            labelValue1.Size = new Size(67, 15);
+            labelValue1.TabIndex = 3;
+            labelValue1.Text = "1 значение";
+            // 
+            // textBoxResult
+            // 
+            textBoxResult.Location = new Point(6, 98);
+            textBoxResult.Name = "textBoxResult";
+            textBoxResult.ReadOnly = true;
+            textBoxResult.Size = new Size(173, 23);
+            textBoxResult.TabIndex = 2;
+            // 
+            // textBoxValue2
+            // 
+            textBoxValue2.Location = new Point(79, 40);
+            textBoxValue2.Name = "textBoxValue2";
+            textBoxValue2.Size = new Size(100, 23);
+            textBoxValue2.TabIndex = 1;
+            // 
+            // textBoxValue1
+            // 
+            textBoxValue1.Location = new Point(79, 11);
+            textBoxValue1.Name = "textBoxValue1";
+            textBoxValue1.Size = new Size(100, 23);
+            textBoxValue1.TabIndex = 0;
             // 
             // FormOOP
             // 
