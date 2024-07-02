@@ -1,6 +1,6 @@
 ﻿namespace IntroductoryEducationalPractice
 {
-    partial class FormLogging
+    partial class FormDebugging
     {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +35,13 @@
             labelXValue = new Label();
             labelSumS = new Label();
             labelFuncY = new Label();
+            dataGridView = new DataGridView();
+            ColumnVarX = new DataGridViewTextBoxColumn();
+            ColumnFuncY = new DataGridViewTextBoxColumn();
+            ColumnSLag = new DataGridViewTextBoxColumn();
+            ColumnUpperNumber = new DataGridViewTextBoxColumn();
+            ColumnSumS = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // textBoxXValue
@@ -54,7 +61,7 @@
             // 
             // textBoxFuncY
             // 
-            textBoxFuncY.Location = new Point(118, 100);
+            textBoxFuncY.Location = new Point(12, 144);
             textBoxFuncY.Name = "textBoxFuncY";
             textBoxFuncY.ReadOnly = true;
             textBoxFuncY.Size = new Size(100, 23);
@@ -91,17 +98,53 @@
             // labelFuncY
             // 
             labelFuncY.AutoSize = true;
-            labelFuncY.Location = new Point(118, 82);
+            labelFuncY.Location = new Point(12, 126);
             labelFuncY.Name = "labelFuncY";
             labelFuncY.Size = new Size(68, 15);
             labelFuncY.TabIndex = 6;
             labelFuncY.Text = "Функция Y:";
             // 
-            // FormLogging
+            // dataGridView
+            // 
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Columns.AddRange(new DataGridViewColumn[] { ColumnVarX, ColumnFuncY, ColumnSLag, ColumnUpperNumber, ColumnSumS });
+            dataGridView.Dock = DockStyle.Right;
+            dataGridView.Location = new Point(118, 0);
+            dataGridView.Name = "dataGridView";
+            dataGridView.Size = new Size(682, 450);
+            dataGridView.TabIndex = 7;
+            // 
+            // ColumnVarX
+            // 
+            ColumnVarX.HeaderText = "X";
+            ColumnVarX.Name = "ColumnVarX";
+            // 
+            // ColumnFuncY
+            // 
+            ColumnFuncY.HeaderText = "Y";
+            ColumnFuncY.Name = "ColumnFuncY";
+            // 
+            // ColumnSLag
+            // 
+            ColumnSLag.HeaderText = "Слагаемое";
+            ColumnSLag.Name = "ColumnSLag";
+            // 
+            // ColumnUpperNumber
+            // 
+            ColumnUpperNumber.HeaderText = "Верхнее число (2, 5, 10, ...)";
+            ColumnUpperNumber.Name = "ColumnUpperNumber";
+            // 
+            // ColumnSumS
+            // 
+            ColumnSumS.HeaderText = "S";
+            ColumnSumS.Name = "ColumnSumS";
+            // 
+            // FormDebugging
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dataGridView);
             Controls.Add(labelFuncY);
             Controls.Add(labelSumS);
             Controls.Add(labelXValue);
@@ -109,8 +152,9 @@
             Controls.Add(textBoxFuncY);
             Controls.Add(textBoxSumS);
             Controls.Add(textBoxXValue);
-            Name = "FormLogging";
+            Name = "FormDebugging";
             Text = "FormLogging";
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -124,5 +168,11 @@
         private Label labelXValue;
         private Label labelSumS;
         private Label labelFuncY;
+        private DataGridView dataGridView;
+        private DataGridViewTextBoxColumn ColumnVarX;
+        private DataGridViewTextBoxColumn ColumnFuncY;
+        private DataGridViewTextBoxColumn ColumnSLag;
+        private DataGridViewTextBoxColumn ColumnUpperNumber;
+        private DataGridViewTextBoxColumn ColumnSumS;
     }
 }

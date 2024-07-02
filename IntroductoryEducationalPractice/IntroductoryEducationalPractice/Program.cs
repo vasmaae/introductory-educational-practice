@@ -23,7 +23,7 @@ namespace IntroductoryEducationalPractice
                 .Build();
 
 
-            services.AddSingleton<FormLogging>()
+            services.AddSingleton<FormDebugging>()
                     .AddLogging(builder =>
                     {
                         builder.AddSerilog(new LoggerConfiguration()
@@ -32,7 +32,7 @@ namespace IntroductoryEducationalPractice
                     });
 
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
-            Application.Run(serviceProvider.GetRequiredService<FormLogging>());
+            Application.Run(serviceProvider.GetRequiredService<FormDebugging>());
         }
     }
 }
